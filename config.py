@@ -1,0 +1,4 @@
+# sendgrid
+API_KEY = 'PUT_YOUR_API_KEY'
+
+FROM_EMAIL = 'PUT_FROM_EMAIL'
