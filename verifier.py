@@ -8,21 +8,28 @@ def get_secret_code():
 
 
 def get_parameters(raw_parameters):
+    email = ''
+    language = config.BY
+
     if 'address' in raw_parameters:
-        return raw_parameters['address'].replace('%40', '@')
-    else:
-        return ''
+        email = raw_parameters['address'].replace('%40', '@')
+
+    if 'language' in raw_parameters:
+        if raw_parameters['language'] == config.RU:
+            language = config.RU
+
+    return email, language
 
 
 def send_verification_mail(raw_parameters):
-    email = get_parameters(raw_parameters)
+    email, language = get_parameters(raw_parameters)
 
     if not email:
         return config.FAIL
 
     secret_code = get_secret_code()
 
-    if mailer.send_mail(email, secret_code) in config.SUCCESS_CODES:
+    if mailer.send_mail(email, secret_code, language) in config.SUCCESS_CODES:
         return str(secret_code)
     else:
         return config.FAIL

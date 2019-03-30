@@ -5,3 +5,7 @@ FROM_EMAIL = 'PUT_FROM_EMAIL'
 
 SUCCESS_CODES = ['200', '202']
 FAIL = '42'
+
+# language
+BY = '_by'
+RU = '_ru'
