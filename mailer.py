@@ -1,12 +1,13 @@
 import config
 import sendgrid
+import os
 from sendgrid.helpers.mail import *
 
 
 def send_mail(email, code, language):
-    sg = sendgrid.SendGridAPIClient(apikey=config.API_KEY)
+    sg = sendgrid.SendGridAPIClient(config.API_KEY)
     from_email = Email(config.FROM_EMAIL)
-    to_email = Email(email)
+    to_email = To(email)
 
     if language == config.RU:
         subject = 'Код подтверждения email для бота "Паркун"'
@@ -15,6 +16,10 @@ def send_mail(email, code, language):
         subject = 'Код пацверджання email для бота "Паркун"'
         content = Content('text/plain', 'Ваш код пацверджання: ' + str(code))
 
-    mail = Mail(from_email, subject, to_email, content)
+    mail = Mail(from_email=from_email,
+                subject=subject,
+                to_emails=(to_email),
+                plain_text_content=content)
+
     response = sg.client.mail.send.post(request_body=mail.get())
     return str(response.status_code)
