@@ -1,7 +1,6 @@
 import config
 import sendgrid
-import os
-from sendgrid.helpers.mail import *
+from sendgrid.helpers.mail import Email, To, Content, Mail
 
 
 def send_mail(email, code, language):
