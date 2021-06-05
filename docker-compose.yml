@@ -1,0 +1,17 @@
+version: "3.5"
+
+services:
+  email_verifier:
+    container_name: email_verifier
+    image: skaborik/email_verifier:1.0.0
+    ports:
+      - 5000:80
+    restart: always
+    hostname: email_verifier
+    env_file:
+      - ./.env
+    environment:
+      - FLASK_APP=main.py
+      - FLASK_DEBUG=0
+      - "RUN=flask run --host=0.0.0.0 --port=80"
+    command: flask run --host=0.0.0.0 --port=80
