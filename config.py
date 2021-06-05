@@ -1,7 +1,16 @@
-# sendgrid
-API_KEY = 'PUT_YOUR_API_KEY'
+from os import getenv
+from os.path import join, dirname
+from dotenv import load_dotenv
 
-FROM_EMAIL = 'PUT_FROM_EMAIL'
+# Create .env file path.
+dotenv_path = join(dirname(__file__), ".env")
+
+# Load file from the path.
+load_dotenv(dotenv_path)
+
+# sendgrid
+API_KEY = getenv("API_KEY", "")
+FROM_EMAIL = getenv("FROM_EMAIL", "")
 
 SUCCESS_CODES = ['200', '202']
 FAIL = '42'
